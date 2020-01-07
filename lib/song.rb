@@ -26,7 +26,6 @@ class Song
         #binding.pry
         @genre = genre
         genre.songs << self unless genre.songs.include?(self)
-
     end
     
     def self.create(name)
@@ -49,5 +48,24 @@ class Song
 
     def self.find_or_create_by_name(name)
         self.find_by_name(name) || self.create(name)
+    end
+
+    def self.new_from_filename(name)
+        self.all.detect { |song|song.name == name}
+        artist_name = name.split(" - ")[0]
+        song_name = name.split(" - ")[1]
+        genre_name = name.split(" - ")[2].chomp(".mp3")
+
+        song = Song.new(song_name)
+        song.artist = Artist.find_or_create_by_name(artist_name)
+        song.genre = Genre.find_or_create_by_name(genre_name)
+        song
+    end
+
+    def self.create_from_filename(name)
+        file = Song.new_from_filename(name)
+        file.save
+        file
+
     end
 end

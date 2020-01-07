@@ -6,7 +6,7 @@ class Genre
 
     attr_accessor :name
     attr_reader :songs
-   @@all = []
+    @@all = []
 
     def initialize(name)
         @name = name
@@ -27,7 +27,7 @@ class Genre
     end
 
     def self.create(name)
-      new_song = new(name)
+        new_song = new(name)
         new_song.save
         new_song
     end
@@ -35,10 +35,4 @@ class Genre
     def artists
         self.songs.map { |song|song.artist}.uniq
     end
-
-    
-
-
-
-
 end
