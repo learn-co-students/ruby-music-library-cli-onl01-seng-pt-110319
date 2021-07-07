@@ -13,7 +13,7 @@ context "Song" do
       same_song = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
 
       expect(Song.all.length).to eq(2)
-      expect(same_song).to be(song_two)
+      expect(same_song).to eq(song_two)
     end
 
     it "invokes .find_by_name instead of re-coding the same functionality" do
